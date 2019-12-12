@@ -4,7 +4,7 @@ Check these code from [cmake-3.16.1/Help/guid/tutorial/](https://cmake.org/downl
 
 For learning CMake, I will follow [official tutorial document](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#id1) and do changes in theses files.
 
-More offical repo, I search into these address:
+More official repo, I search into these address:
 
 [repo for CMake](https://gitlab.kitware.com/cmake/cmake/tree/master)
 
