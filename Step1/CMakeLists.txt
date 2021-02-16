@@ -45,6 +45,7 @@ configure_file(TutorialConfig.h.in TutorialConfig.h)
 # @ONLY
 # Restrict variable replacement to references of the form @VAR@. This is useful for configuring scripts that use ${VAR} syntax.
 
+message("====== before include")
 message("INCLUDE_DIRECTORIES = ${INCLUDE_DIRECTORIES}")
 message("INTERFACE_INCLUDE_DIRECTORIES = ${INTERFACE_INCLUDE_DIRECTORIES}")
 
@@ -68,5 +69,6 @@ target_include_directories(Tutorial PUBLIC
 # Tutorial comes from add_executable above
 # PUBLIC make dir "${PROJECT_BINARY_DIR}" append into INCLUDE_DIRECTORIES property or INTERFACE_INCLUDE_DIRECTORIES property
 
+message("====== after include")
 message("INCLUDE_DIRECTORIES = ${INCLUDE_DIRECTORIES}")
 message("INTERFACE_INCLUDE_DIRECTORIES = ${INTERFACE_INCLUDE_DIRECTORIES}")
