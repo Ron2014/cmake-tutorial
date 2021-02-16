@@ -37,7 +37,7 @@ add_executable(Tutorial tutorial.cxx)
 configure_file(TutorialConfig.h.in TutorialConfig.h)
 
 # configure_file: https://cmake.org/cmake/help/v3.16/command/configure_file.html?highlight=configure_file
-# 1. copy file: src -> des
+# 1. copy file: source_dir -> binary_dir
 # 2. substitute variable values referenced (@VAR@ or ${VAR})
 # 3. #cmakedefine VAR       -> #define VAR
 #    #cmakedefine01 VAR     -> #define VAR 1

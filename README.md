@@ -21,10 +21,10 @@ System is unknown to cmake, create:
 Platform/MINGW64_NT-10.0 to use this system, please send your config file to cmake@www.cmake.org so it can be added to cmake
 ```
 
-Suggest to `pacman -S mingw-w64-x86_64-cmake` and then you can
+Suggest to
 
-`cmake .. -G "MinGW Makefiles"`
+```
+pacman -S --needed git base-devel mingw-w64-x86_64-gcc mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake
+```
 
-or
-
-`cmake .. -G "MSYS Makefiles"`
+and then you can `cmake .. -G "MinGW Makefiles"` or `cmake .. -G "MSYS Makefiles"`
