@@ -64,3 +64,27 @@ do_test(Tutorial 7 "7 is 2.645")
 do_test(Tutorial 25 "25 is 5")
 do_test(Tutorial -25 "-25 is [-nan|nan|0]")
 do_test(Tutorial 0.0001 "0.0001 is 0.01")
+
+include(InstallRequiredSystemLibraries) # include any runtime libraries
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack) # setup an installer
+
+## some ways to distribute project
+#
+# BINARY ======
+# 1. need INSTALL file and nsis
+# > pacman -S --noconfirm mingw32/mingw-w64-i686-nsis mingw64/mingw-w64-x86_64-nsis
+# > cpack
+#
+# 2. It works. default is ZIP
+# > cpack -G ZIP -C Debug
+#
+# SOURCE ======
+# 3.
+# > cpack --config CPackSourceConfig.cmake
+#
+# 4. not work
+# make package
+#
