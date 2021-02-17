@@ -56,6 +56,27 @@ if(USE_MYMATH)
   list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/MathFunctions")
 endif()
 
+set(USE_KEY "hello")
+message(STATUS "USE_KEY = ${USE_KEY}")
+
+# print every element of list
+function(print_list arg)
+  list(LENGTH ${ARGV0} argv_len)
+  message(STATUS "length of ${ARGV0}: ${argv_len}")
+  set(i 0)
+  while( i LESS ${argv_len})
+    list(GET ${ARGV0} ${i} argv_value)
+    message(STATUS "${ARGV0}[${i}]: ${argv_value}")
+    math(EXPR i "${i} + 1")
+  endwhile()
+endfunction()
+
+print_list(EXTRA_LIBS)
+print_list(EXTRA_INCLUDES)
+
+message(STATUS "EXTRA_LIBS = ${EXTRA_LIBS}")
+message(STATUS "EXTRA_INCLUDES = ${EXTRA_INCLUDES}")
+
 # add the executable
 add_executable(Tutorial tutorial.cxx)
 
