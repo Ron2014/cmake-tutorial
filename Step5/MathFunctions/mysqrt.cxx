@@ -1,5 +1,9 @@
 #include <iostream>
 
+#if defined(HAVE_LOG) && defined(HAVE_EXP)
+#include <cmath>
+#endif
+
 #include "MathFunctions.h"
 
 // a hack square root calculation using simple operations
@@ -9,6 +13,11 @@ double mysqrt(double x)
     return 0;
   }
 
+#if defined(HAVE_LOG) && defined(HAVE_EXP)
+  double result = exp(log(x) * 0.5);
+  std::cout << "Computing sqrt of " << x << " to be " << result
+            << " using log and exp" << std::endl;
+#else
   double result = x;
 
   // do ten iterations
@@ -20,5 +29,7 @@ double mysqrt(double x)
     result = result + 0.5 * delta / result;
     std::cout << "Computing sqrt of " << x << " to be " << result << std::endl;
   }
+#endif
+
   return result;
 }
