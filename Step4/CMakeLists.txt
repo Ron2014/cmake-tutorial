@@ -80,5 +80,5 @@ do_test(Tutorial 0.0001 "0.0001 is 0.01")
 # cmake --build .
 # ctest -C Debug -VV
 #
-# way 2.
+# way 2. for windows
 # cmake --build . --target RUN_TESTS

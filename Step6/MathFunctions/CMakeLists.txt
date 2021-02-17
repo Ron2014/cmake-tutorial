@@ -1,9 +1,24 @@
-add_library(MathFunctions mysqrt.cxx)
+## generate Table.h by program
+add_executable(MakeTable MakeTable.cxx)
+
+# use COMMAND MakeTable <filename> to create file Table.h
+add_custom_command(
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+  COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+  DEPENDS MakeTable
+  )
+
+# Table.h only contain symbol sqrtTable
+add_library(MathFunctions
+            mysqrt.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+            )
 
 # state that anybody linking to us needs to include the current source dir
 # to find MathFunctions.h, while we don't.
 target_include_directories(MathFunctions
-          INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+          INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}   # for locating MathFunction.h
+          PRIVATE ${CMAKE_CURRENT_BINARY_DIR}     # for locating Table.h
           )
 
 # does this system provide the log and exp functions?
