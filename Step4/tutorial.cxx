@@ -1,5 +1,4 @@
 // A simple program that computes the square root of a number
-#include <cmath>
 #include <iostream>
 #include <string>
 
@@ -7,7 +6,9 @@
 
 // should we include the MathFunctions header?
 #ifdef USE_MYMATH
-#  include "MathFunctions.h"
+#include "MathFunctions.h"
+#else
+#include <cmath>
 #endif
 
 int main(int argc, char* argv[])
