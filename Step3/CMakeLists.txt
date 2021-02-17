@@ -17,7 +17,7 @@ configure_file(TutorialConfig.h.in TutorialConfig.h)
 # add the MathFunctions library
 if(USE_MYMATH)
   add_subdirectory(MathFunctions)
-  list(APPEND EXTRA_LIBS MathFunctions)
+  list(APPEND EXTRA_LIBS MathFunctions)   # we moved add include path motion to the subdirectory
 endif()
 
 # add the executable
