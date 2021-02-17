@@ -22,6 +22,33 @@ if(NOT (HAVE_LOG AND HAVE_EXP))
   check_symbol_exists(log "math.h" HAVE_LOG)
   check_symbol_exists(exp "math.h" HAVE_EXP)
 
+## find library
+# 
+# 1. default path
+#
+# /usr/lib
+# /lib
+#
+# 2. environment variable
+#
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:...
+#
+# 3. ldconfig
+#
+## get all extra library
+# cat /etc/ld.so.conf.d/* 
+#
+## add library path
+## for example: opensIsl
+# echo "/usr/local/ssl/lib" >> /etc/ld.so.conf.d/openssl.conf
+# ldconfig
+#
+# 4. build with param
+#
+# -Wl£¬ -rpath
+#
+
+
   message("======3 ${HAVE_LOG}")
   message("======3 ${HAVE_EXP}")
 
