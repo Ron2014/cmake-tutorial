@@ -37,7 +37,12 @@ install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
   )
 
 # enable testing
-enable_testing()
+# enable_testing()
+include(CTest)      # call enable_testing() automatically
+
+# > cmake ..
+# > ctest -VV -C Debug -D Experimental
+# check the result of https://my.cdash.org/index.php?project=CMakeTutorial.
 
 # does the application run
 add_test(NAME Runs COMMAND Tutorial 25)
