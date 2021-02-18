@@ -1,24 +1,3 @@
-# old struction
-# 
-# -- Tutorial: exe
-# ---- TutorialConfig.h
-# ---- TutorialConfig.cxx
-# ---- if USE_MYMATH
-# ------ MathFunction.h
-# ------ MathFunction: lib
-# -------- Table.h
-# -------- mysqrt.cxx
-# ---------- if HAVE_LOG HAVE_EXP
-# ------------ exp(log(x) * 0.5)
-# ---------- else
-# ------------ ...
-# -----else
-# ------ cmath
-# -------- sqrt
-#
-# -- MakeTable: exe
-# ---- MakeTable.cxx
-#
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name and version

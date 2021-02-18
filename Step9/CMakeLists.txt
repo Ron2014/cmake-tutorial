@@ -8,21 +8,85 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # should we use our own math functions
-option(USE_MYMATH "Use tutorial provided math implementation" ON)
+# option(USE_MYMATH "Use tutorial provided math implementation" ON)
+#
+# control where the static and shared libraries are built so that on windows
+# we don't need to tinker with the path to run the executable
+#
+# archieve output artifacts:
+# 1. static library file    (.lib .a)       of a static library target    created by add_library() with STATIC option.
+# 2. import library file    (.lib)          of a shared library target    created by add_library() with SHARED option.
+# 3. import library file    (.lib)          of an executable target       created by add_executable() when seted ENABLE_EXPORTS.
+# 4. linker import file     (.imp)          of an executable target       created by add_executable() when seted ENABLE_EXPORTS.
+#
+# library output artifacts:
+# 1. loadable module file   (.dll .so)      of a module target            created by add_library() with MODULE option.
+# 2. shared library file    (.so .dylib)    of a shared library target    created by add_library() with SHARED option.
+#
+# runtime output artifacts:
+# 1. executable file        (.exe)          of an executable target       created by add_executable()
+# 2. executable file        (.dll)          of a shared library target    created by add_library() with SHARED option.
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
 configure_file(TutorialConfig.h.in TutorialConfig.h)
 
 # add the MathFunctions library
-if(USE_MYMATH)
-  add_subdirectory(MathFunctions)
-  list(APPEND EXTRA_LIBS MathFunctions)
-endif()
+# if(USE_MYMATH)
+#   add_subdirectory(MathFunctions)
+#   list(APPEND EXTRA_LIBS MathFunctions)
+# endif()
+
+# old struction
+# 
+# -- Tutorial: exe
+# ---- TutorialConfig.h
+# ---- Tutorial.cxx
+# ---- if USE_MYMATH
+# ------ MathFunctions.h
+# ------ MathFunctions: lib
+# -------- Table.h
+# -------- mysqrt.cxx
+# ---------- if HAVE_LOG HAVE_EXP
+# ------------ exp(log(x) * 0.5)
+# ---------- else
+# ------------ ...
+# -----else
+# ------ cmath
+# -------- sqrt
+#
+# -- MakeTable: exe
+# ---- MakeTable.cxx
+#
+#
+# new struction
+#
+# -- Tutorial: exe
+# ---- TutorialConfig.h
+# ---- Tutorial.xxx
+# ---- MathFunctions: lib
+# ------ if USE_MYMATH
+# -------- MakeTable: exe
+# ---------- MakeTable.cxx
+# -------- SqrtLibrary: lib
+# ---------- mysqrt.cxx
+# ---------- Table.h
+# ------ else
+# -------- cmath
+# ---------- sqrt
+# 
+
+add_subdirectory(MathFunctions)
 
 # add the executable
 add_executable(Tutorial tutorial.cxx)
-target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})
+target_link_libraries(Tutorial PUBLIC MathFunctions)
 
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
