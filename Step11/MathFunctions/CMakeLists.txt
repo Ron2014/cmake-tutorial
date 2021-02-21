@@ -15,7 +15,7 @@ if(USE_MYMATH)
 
   # first we add the executable that generates the table
   add_executable(MakeTable MakeTable.cxx)
-  target_link_libraries(MakeTable tutorial_compiler_flags)
+  target_link_libraries(MakeTable PRIVATE tutorial_compiler_flags)
 
   # add the command to generate the source code
   add_custom_command(
@@ -51,5 +51,9 @@ target_link_libraries(MathFunctions PUBLIC tutorial_compiler_flags)
 target_compile_definitions(MathFunctions PRIVATE "EXPORTING_MYMATH")
 
 # install rules
-install(TARGETS MathFunctions DESTINATION lib)
+set(installable_libs MathFunctions tutorial_compiler_flags)
+if(TARGET SqrtLibrary)
+  list(APPEND installable_libs SqrtLibrary)
+endif()
+install(TARGETS ${installable_libs} DESTINATION lib)
 install(FILES MathFunctions.h DESTINATION include)
